@@ -1,5 +1,5 @@
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import BasePermission
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication
+from rest_framework.permissions import BasePermission, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .models import Contact
@@ -24,7 +24,10 @@ class ContactViewSet(ModelViewSet):
     ordering_fields = ['first_name', 'last_name']
     ordering = ['-id']
     permission_classes = [IsAuthenticatedOrReadAndPostOnly]
-    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+    # permission_classes = [BasicAuthentication]
+    authentication_classes = [TokenAuthentication]
+    # authentication_classes = [BasicAuthentication]
 
 
 # class ContactListView(viewsets.generics.ListAPIView):
